@@ -10,27 +10,27 @@ startRec.addEventListener('click', async () => {
 	const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 	
 	mediaRecorder = new MediaRecorder(stream);
-	audioChunks = [];
+	audioSections = [];
 	
 	mediaRecorder.addEventListener('dataavailable', (event) => {
 	  audioSections.push(event.data);
 	});
 	
 	mediaRecorder.addEventListener('stop', () => {
-	  const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-	  console.log('Recorded Blob:', audioBlob);
-	  console.log('Size in bytes:', audioBlob.size);
+	    const audioBlob = new Blob(audioSections, { type: 'audio/webm' });
+		console.log('Recorded Blob:', audioBlob);
+		console.log('Size in bytes:', audioBlob.size);
 
-	  statusId.textContent = 'Idle';
-	  statusId.classList.remove('recording');
+		statusId.textContent = 'Idle';
+		statusId.classList.remove('recording');
 	});
 	
 	mediaRecorder.start();
 	statusId.textContent = 'Recording';
 	statusId.classList.add('recording');
 
-	recordBtn.disabled = true;
-	stopBtn.disabled = false;
+	startRec.disabled = true;
+	stopRec.disabled = false;
 });
 
 stopRec.addEventListener('click', () => {
