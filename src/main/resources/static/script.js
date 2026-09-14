@@ -18,8 +18,8 @@ startRec.addEventListener('click', async () => {
 	
 	mediaRecorder.addEventListener('stop', () => {
 	    const audioBlob = new Blob(audioSections, { type: 'audio/webm' });
-		console.log('Recorded Blob:', audioBlob);
-		console.log('Size in bytes:', audioBlob.size);
+		// console.log('Recorded Blob:', audioBlob);
+		// console.log('Size in bytes:', audioBlob.size);
 
 		statusId.textContent = 'Idle';
 		statusId.classList.remove('recording');
@@ -34,7 +34,13 @@ startRec.addEventListener('click', async () => {
 });
 
 stopRec.addEventListener('click', () => {
-  mediaRecorder.stop();
-  startRec.disabled = false;
-  stopRec.disabled = true;
+	mediaRecorder.stop();
+	startRec.disabled = false;
+	stopRec.disabled = true;
+	  
+	statusId.textContent = 'Uploading';
+	// UPLOAD AUDIO TO TranscriptController
+	
 });
+
+
